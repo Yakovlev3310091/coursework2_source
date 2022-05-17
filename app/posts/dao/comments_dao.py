@@ -12,6 +12,7 @@ class CommentsDAO:
             data = json.load(file)
         return data
 
+
     def get_by_post_pk(self, post_pk):
         """ Возвращает комментарии к определенному посту"""
         comments = self._load_comments()
