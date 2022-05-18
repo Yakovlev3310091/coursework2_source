@@ -41,16 +41,29 @@ def posts_one(post_pk):
         return render_template("post.html", post=post, comments=comments, number_of_comments=number_of_comments)
 
 
-@posts_blueprint.errorhandler(404)
-def post_error(e):
-    return "Такого поста найти не получилось", 404
-
-
 @posts_blueprint.route("/search/")
 def posts_search():
-    return "Поиск по постам"
+
+    query = request.args.get("s", "")
+
+    if query != "":
+        posts = posts_dao.search(query)
+        number_of_posts = len(posts)
+    else:
+        posts = []
+        number_of_posts = 0
+
+    return render_template("search.html", query=query, posts=posts, number_of_posts=number_of_posts)
 
 
 @posts_blueprint.route("/users/<username>/")
 def posts_by_user(username):
-    return "Поиск по пользователям"
+    """ Выводит посты конкретного пользователя"""
+    posts = posts_dao.get_by_user(username)
+    number_of_posts = len(posts)
+    return render_template("user-feed.html", posts=posts, number_of_posts=number_of_posts)
+
+
+@posts_blueprint.errorhandler(404)
+def post_error(e):
+    return "Такого поста найти не получилось", 404
