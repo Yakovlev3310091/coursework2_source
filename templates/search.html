@@ -26,14 +26,14 @@
   <main class="container">
     <div class="search">
       <form action="/search" class="search__form">
-        <input name="s" type="search" class="search__input" value="{{ query }}">
+        <input name="s" type="search" class="search__input" value="{{query}}">
       </form>
       <p class="search_results">Найдено постов: {{ number_of_posts }}</p>
     </div>
     {% if query == "" %}
       <p> Вы не ввели запрос в поисковую строку</p>
     {% else %}
-    <section class="items">
+      <section class="items">
       {% for post in posts %}
       <div class="items__item item">
         <div class="item__top">
@@ -44,20 +44,23 @@
             <span class="item__username">{{ post.poster_name }}</span>
           </a>
         </div>
-        <a href="/posts/{{ post_pk }}" class="item__post-link">
-          <img src="{{ post_pic }}" alt="" width="348" class="item__post-img">
+        <a href="/posts/{{ post.pk }}" class="item__post-link">
+          <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
         <p class="item__descr"> {{ post.content }} </p>
-        <div class="item__post-info">
-          <div class="item__counter">
-            <img src="static/img/eye.png" alt="" class="item__counter-icon" width="26">
-            <span class="item__counter-text">{{ post.views_count }}</span>
+        <div class="item__bottom">
+          <div class="item__post-info">
+            <p class="item__comments-counter">{{ number_of_comments }} Комментарии</p>
+            <div class="item__counter">
+              <img src="/static/img/eye.png" alt="" class="item__counter-icon" width="26">
+              <span class="item__counter-text">{{ post.views_count }}</span>
+            </div>
           </div>
         </div>
         <div class="item__post-bottom">
           <a href="/posts/{{ post.pk }}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
-            <img src="static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+            <img src="/static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>
         </div>
       </div>
