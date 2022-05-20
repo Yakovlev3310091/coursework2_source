@@ -43,15 +43,17 @@
           <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
         <p class="item__descr">{{ post.content }}</p>
+
         <div class="item__bottom">
           <div class="item__post-info">
-            <p class="item__comments-counter">{{ number_of_comments }} Комментарии</p>
+            <p class="item__comments-counter">Комментарии</p>
              <div class="item__counter">
               <img src="/static/img/eye.png" alt="" class="item__counter-icon" width="26">
               <span class="item__counter-text">{{ post.views_count }}</span>
              </div>
           </div>
         </div>
+
         <div class="item__post-bottom">
           <a href="/posts/{{ post.pk }}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
